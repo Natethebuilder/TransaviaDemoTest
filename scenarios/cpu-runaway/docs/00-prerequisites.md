@@ -7,7 +7,9 @@ scenario's managed-identity role assignments:
 Administrator provides the required role-assignment permission. You also need
 Azure CLI with Bicep, and a supported region:
 `eastus2`, `swedencentral`, or `australiaeast`. Azure Bastion tunneling must
-be available in your Azure CLI installation.
+be available in your Azure CLI installation: install the `bastion` extension
+before running the smoke test. The smoke test starts the tunnel in the
+background, so Azure CLI cannot prompt you to install a missing extension.
 
 Use Bash (for example, in the scenario's development container) or PowerShell
 7. The PowerShell smoke test uses Windows networking commands and `curl.exe`,
@@ -22,6 +24,7 @@ az login
 az account set --subscription "<subscription-id>"
 az account show --query "{name:name,id:id}" --output table
 az bicep version
+az extension add --name bastion --upgrade
 ```
 
 The operator who injects and recovers the fault also needs permission to run

@@ -22,6 +22,13 @@ if (Get-Command az -ErrorAction SilentlyContinue) {
     Write-Fail "Azure CLI not found"
 }
 
+az extension show --name bastion *> $null
+if ($LASTEXITCODE -eq 0) {
+    Write-Ok "Azure CLI bastion extension installed"
+} else {
+    Write-Fail "Azure CLI bastion extension missing; run: az extension add --name bastion"
+}
+
 if (Get-Command gh -ErrorAction SilentlyContinue) {
     Write-Ok "GitHub CLI installed"
 } else {

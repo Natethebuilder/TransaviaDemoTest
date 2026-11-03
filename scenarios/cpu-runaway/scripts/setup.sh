@@ -43,6 +43,12 @@ else
   write_fail "Azure CLI not found"
 fi
 
+if az extension show --name bastion >/dev/null 2>&1; then
+  write_ok "Azure CLI bastion extension installed"
+else
+  write_fail "Azure CLI bastion extension missing; run: az extension add --name bastion"
+fi
+
 if command -v gh >/dev/null 2>&1; then
   write_ok "GitHub CLI installed"
 else
